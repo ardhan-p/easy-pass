@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, TestActivity.class);
         String msg = "Hey world!";
-        intent.putExtra(EXTRA_MESSAGE, msg);
-        startActivity(intent);
     }
 }
