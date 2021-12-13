@@ -2,5 +2,12 @@
     <string name="app_name">EasyPass</string>
     <string name="app_intro_desc">Create passwords for all your account and store them in a safe place! Press next to see how it works.</string>
     <string name="app_intro_welcome">Welcome to EasyPass!</string>
+
+    <!-- Button strings -->
     <string name="btn_next">NEXT</string>
+    <string name="btn_get_started">LET\'S START!</string>
+
+    <!-- Creating master password strings -->
+    <string name="title_master_password">Create a master password!</string>
+    <string name="desc_master_password">NOTE: !</string>
 </resources>
