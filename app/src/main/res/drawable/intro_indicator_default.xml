@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="ring"
+               android:thickness="5sp"
+               android:innerRadius="0sp"
+               android:useLevel="false">
 
-</selector>
+            <solid android:color="@color/gray"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>

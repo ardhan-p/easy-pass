@@ -6,13 +6,22 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.easypass.R;
 import com.google.android.material.tabs.TabLayout;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
     private ViewPager pager;
+    Button nextBtn;
+    int pagePosition = 0;
+    boolean readyToStart = false;
     IntroViewPagerAdapter adapter;
     TabLayout indicator;
 
@@ -21,7 +30,11 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        // hides top action bar for aesthetics
+        getSupportActionBar().hide();
+
         // create intro screen objects for viewpager
+        // TODO: add screenshots on relevant screens (the locked.png is currently a placeholder)
         List<IntroScreen> screens = new ArrayList<>();
         screens.add(new IntroScreen("Welcome to EasyPass!", R.drawable.locked));
         screens.add(new IntroScreen("The app allows you to make passwords for your accounts and store them in a secure place!", R.drawable.locked));
@@ -37,5 +50,35 @@ public class IntroActivity extends AppCompatActivity {
         // initialises tabview bullet indicator
         indicator = findViewById(R.id.introTabLayout);
         indicator.setupWithViewPager(pager);
+
+        // button action listener
+        nextBtn = findViewById(R.id.introNextBtn);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pagePosition = pager.getCurrentItem();
+
+                if (readyToStart) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "It worked!", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    // TODO: make new activity where user inputs their master password
+                }
+
+                if (pagePosition < screens.size()) {
+                    readyToStart = false;
+                    pagePosition++;
+                    pager.setCurrentItem(pagePosition);
+                }
+
+                if (pagePosition == screens.size() - 1) {
+                    readyToStart = true;
+                    nextBtn.setText(getResources().getString(R.string.btn_get_started));
+                    nextBtn.setTextColor(getResources().getColor(R.color.white));
+                    nextBtn.setBackgroundColor(getResources().getColor(R.color.blue_btn_color));
+                    indicator.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 }
