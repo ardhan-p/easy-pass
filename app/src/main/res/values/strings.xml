@@ -9,5 +9,5 @@
 
     <!-- Creating master password strings -->
     <string name="title_master_password">Create a master password!</string>
-    <string name="desc_master_password">NOTE: !</string>
+    <string name="desc_master_password">NOTE: Make sure that this password can be remembered!</string>
 </resources>
