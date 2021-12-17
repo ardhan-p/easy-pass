@@ -4,15 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.easypass.R;
+import com.example.easypass.masterpassword.CreateMasterPasswordActivity;
 import com.google.android.material.tabs.TabLayout;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +28,14 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        // intent for starting next activity
+        Intent masterPasswordActivityIntent = new Intent(this, CreateMasterPasswordActivity.class);
+
         // hides top action bar for aesthetics
         getSupportActionBar().hide();
 
         // create intro screen objects for viewpager
-        // TODO: add screenshots on relevant screens (the locked.png is currently a placeholder)
+        // TODO: add screenshots on relevant screens (locked.png is currently a placeholder)
         List<IntroScreen> screens = new ArrayList<>();
         screens.add(new IntroScreen("Welcome to EasyPass!", R.drawable.locked));
         screens.add(new IntroScreen("The app allows you to make passwords for your accounts and store them in a secure place!", R.drawable.locked));
@@ -59,10 +60,7 @@ public class IntroActivity extends AppCompatActivity {
                 pagePosition = pager.getCurrentItem();
 
                 if (readyToStart) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "It worked!", Toast.LENGTH_SHORT);
-                    toast.show();
-
-                    // TODO: make new activity where user inputs their master password
+                    startActivity(masterPasswordActivityIntent);
                 }
 
                 if (pagePosition < screens.size()) {
@@ -81,4 +79,6 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

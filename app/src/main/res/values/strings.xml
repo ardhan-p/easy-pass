@@ -9,5 +9,7 @@
 
     <!-- Creating master password strings -->
     <string name="title_master_password">Create a master password!</string>
-    <string name="desc_master_password">NOTE: !</string>
+    <string name="desc_master_password">NOTE: Make sure that this password can easily be remembered!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
