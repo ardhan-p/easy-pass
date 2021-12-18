@@ -11,16 +11,34 @@
         android:layout_height="match_parent"
         android:background="@color/blue_bg_color">
 
-        <TextView
-            android:id="@+id/searchTest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLoginsLayout"
+            android:layout_width="310dp"
+            android:layout_height="67dp"
+            app:layout_constraintBottom_toTopOf="@+id/search_password_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchLoginInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Search logins..."
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_password_list"
+            android:layout_width="match_parent"
+            android:layout_height="498dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.707" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
