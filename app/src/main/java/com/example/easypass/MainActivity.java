@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
 
+        // switches displayed fragment depending on what the user has selected on nav bar
         navBar = findViewById(R.id.mainNavBar);
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // closes app if user pressed back on this activity
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
