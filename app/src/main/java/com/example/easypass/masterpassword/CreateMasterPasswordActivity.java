@@ -24,7 +24,7 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
 
         Intent mainMenuActivityIntent = new Intent(this, MainActivity.class);
 
-        masterPasswordInput = findViewById(R.id.masterPasswordInput);
+        masterPasswordInput = findViewById(R.id.searchLoginInput);
         confirmBtn = findViewById(R.id.confirmMasterPasswordBtn);
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {

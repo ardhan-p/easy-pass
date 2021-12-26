@@ -3,11 +3,13 @@ package com.example.easypass;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.easypass.database.AppDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,8 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "easypass-db").build();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
 
+        // switches displayed fragment depending on what the user has selected on nav bar
         navBar = findViewById(R.id.mainNavBar);
         navBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // closes app if user pressed back on this activity
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
