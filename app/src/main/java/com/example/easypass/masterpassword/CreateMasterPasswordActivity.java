@@ -30,6 +30,7 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: hash the master password and store in database
                 String msg = masterPasswordInput.getText().toString();
                 Toast t = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
                 t.show();

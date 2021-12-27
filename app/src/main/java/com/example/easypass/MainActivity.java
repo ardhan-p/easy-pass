@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.easypass.database.AppDatabase;
+import com.example.easypass.database.Login;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +21,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "easypass-db").build();
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "easypass-db")
+                .allowMainThreadQueries()
+                .build();
+
+        // TODO: change this section of database testing
+        Login testLogin = new Login("TestTitle", "TestName", "TestPass");
+        db.loginDao().deleteLogin(testLogin);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
 

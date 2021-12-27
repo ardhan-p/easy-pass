@@ -23,5 +23,13 @@ public class Login {
     @NonNull
     public String loginPassword;
 
-    // TODO: create login constructors here
+    public Login(String loginTitle, String loginUsername, String loginPassword) {
+        this.loginTitle = loginTitle;
+        this.loginUsername = loginUsername;
+        this.loginPassword = loginPassword;
+    }
+
+    public Login() {
+
+    }
 }

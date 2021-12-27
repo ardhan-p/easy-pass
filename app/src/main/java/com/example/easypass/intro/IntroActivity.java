@@ -59,16 +59,19 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 pagePosition = pager.getCurrentItem();
 
+                // button will prompt the user to go to master password creation screen
                 if (readyToStart) {
                     startActivity(masterPasswordActivityIntent);
                 }
 
+                // if the page position is not at the end, it will go to the next page of the pager
                 if (pagePosition < screens.size()) {
                     readyToStart = false;
                     pagePosition++;
                     pager.setCurrentItem(pagePosition);
                 }
 
+                // once pager has reached the end, the button will change to show that the user is prompted to create master password
                 if (pagePosition == screens.size() - 1) {
                     readyToStart = true;
                     nextBtn.setText(getResources().getString(R.string.btn_get_started));
