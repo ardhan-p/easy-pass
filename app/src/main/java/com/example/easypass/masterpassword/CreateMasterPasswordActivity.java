@@ -13,6 +13,14 @@ import com.example.easypass.MainActivity;
 import com.example.easypass.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 public class CreateMasterPasswordActivity extends AppCompatActivity {
     TextInputEditText masterPasswordInput;
     Button confirmBtn;
@@ -23,6 +31,39 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         editor.putBoolean("tutorialComplete", true);
         editor.putString("masterPassword", password);
         editor.commit();
+    }
+
+    private String generatePasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        int iterations = 1024;
+        char[] chars = password.toCharArray();
+        byte[] salt = generatePasswordSalt();
+
+        PBEKeySpec keySpec = new PBEKeySpec(chars, salt, iterations,64 * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+
+        byte[] hash = skf.generateSecret(keySpec).getEncoded();
+
+        return iterations + ":" + translateToHex(salt) + ":" + translateToHex(hash);
+    }
+
+    private byte[] generatePasswordSalt() throws NoSuchAlgorithmException {
+        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+        byte[] salt = new byte[16];
+        sr.nextBytes(salt);
+        return salt;
+    }
+
+    private String translateToHex(byte[] byteArray) throws NoSuchAlgorithmException {
+        BigInteger bigInt = new BigInteger(1, byteArray);
+        String hex = bigInt.toString(16);
+
+        int paddingLength = (byteArray.length * 2) - hex.length();
+
+        if (paddingLength > 0) {
+            return String.format("%0" + paddingLength + "d", 0) + hex;
+        } else {
+            return hex;
+        }
     }
 
     @Override
