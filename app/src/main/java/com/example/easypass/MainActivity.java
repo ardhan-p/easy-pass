@@ -21,14 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // initialises access with local room database
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "easypass-db")
                 .allowMainThreadQueries()
                 .build();
 
-        // TODO: change this section of database testing
-        Login testLogin = new Login("TestTitle", "TestName", "TestPass");
-        db.loginDao().deleteLogin(testLogin);
-
+        // initialises default fragment with home fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
 
         // switches displayed fragment depending on what the user has selected on nav bar
