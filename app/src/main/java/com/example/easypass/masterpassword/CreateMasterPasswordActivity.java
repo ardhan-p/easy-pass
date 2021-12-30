@@ -34,6 +34,8 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    // source:
+    // https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
     private String generatePasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 1024;
         char[] chars = password.toCharArray();
@@ -111,12 +113,13 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: hash the master password and store in shared preferences
-                String msg = masterPasswordInput.getText().toString();
+                //TODO: store hashed master password into shared preferences
+                String newPassword = masterPasswordInput.getText().toString();
+                String storedPassword = "password";
 
                 try {
-                    String masterPassword = generatePasswordHash(msg);
-                    Log.i("TestPassword", masterPassword);
+                    String storedMasterPassword = generatePasswordHash(storedPassword);
+                    Log.i("Match?", Boolean.toString(validateMasterPassword(newPassword, storedMasterPassword)));
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 } catch (InvalidKeySpecException e) {
