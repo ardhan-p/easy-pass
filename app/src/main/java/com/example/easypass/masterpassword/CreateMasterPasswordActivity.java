@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -40,7 +41,6 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
 
         PBEKeySpec keySpec = new PBEKeySpec(chars, salt, iterations,64 * 8);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-
         byte[] hash = skf.generateSecret(keySpec).getEncoded();
 
         return iterations + ":" + translateToHex(salt) + ":" + translateToHex(hash);
@@ -53,6 +53,7 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         return salt;
     }
 
+
     private String translateToHex(byte[] byteArray) throws NoSuchAlgorithmException {
         BigInteger bigInt = new BigInteger(1, byteArray);
         String hex = bigInt.toString(16);
@@ -64,6 +65,36 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         } else {
             return hex;
         }
+    }
+
+    private byte[] translateFromHex(String hex) throws NoSuchAlgorithmException {
+        byte[] bytes = new byte[hex.length() / 2];
+
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+
+        return bytes;
+    }
+
+    private boolean validateMasterPassword(String inputPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String[] passwordParts = storedPassword.split(":");
+
+        int iterations = Integer.parseInt(passwordParts[0]);
+        byte[] salt = translateFromHex(passwordParts[1]);
+        byte[] hash = translateFromHex(passwordParts[2]);
+
+        PBEKeySpec keySpec = new PBEKeySpec(inputPassword.toCharArray(), salt, iterations, hash.length * 8);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] newHash = skf.generateSecret(keySpec).getEncoded();
+
+        int difference = hash.length ^ newHash.length;
+
+        for (int i = 0; i < hash.length && i < newHash.length; i++) {
+            difference |= hash[i] ^ newHash[i];
+        }
+
+        return difference == 0;
     }
 
     @Override
@@ -82,9 +113,17 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // TODO: hash the master password and store in shared preferences
                 String msg = masterPasswordInput.getText().toString();
-                Toast t = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-                t.show();
-                startActivity(mainMenuActivityIntent);
+
+                try {
+                    String masterPassword = generatePasswordHash(msg);
+                    Log.i("TestPassword", masterPassword);
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeySpecException e) {
+                    e.printStackTrace();
+                }
+
+                // startActivity(mainMenuActivityIntent);
             }
         });
     }
