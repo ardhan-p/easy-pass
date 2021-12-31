@@ -27,10 +27,10 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
     Button confirmBtn;
 
     private void saveMasterPassword(String password) {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("passwordPrefs", MODE_PRIVATE);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("appPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean("tutorialComplete", true);
-        editor.putString("masterPassword", password);
+        editor.putBoolean(getString(R.string.prefs_intro_status), true);
+        editor.putString(getString(R.string.prefs_master_password), password);
         editor.commit();
     }
 
@@ -113,20 +113,17 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: store hashed master password into shared preferences
                 String newPassword = masterPasswordInput.getText().toString();
-                String storedPassword = "password";
 
                 try {
-                    String storedMasterPassword = generatePasswordHash(storedPassword);
-                    Log.i("Match?", Boolean.toString(validateMasterPassword(newPassword, storedMasterPassword)));
+                    String newMasterPassword = generatePasswordHash(newPassword);
+                    saveMasterPassword(newMasterPassword);
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 } catch (InvalidKeySpecException e) {
                     e.printStackTrace();
                 }
-
-                // startActivity(mainMenuActivityIntent);
+                startActivity(mainMenuActivityIntent);
             }
         });
     }

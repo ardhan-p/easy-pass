@@ -3,11 +3,13 @@ package com.example.easypass.intro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.easypass.MainActivity;
 import com.example.easypass.R;
 import com.example.easypass.masterpassword.CreateMasterPasswordActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,13 +25,26 @@ public class IntroActivity extends AppCompatActivity {
     IntroViewPagerAdapter adapter;
     TabLayout indicator;
 
+    private boolean checkIntroStatus() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("appPrefs", MODE_PRIVATE);
+        return pref.getBoolean(getString(R.string.prefs_intro_status), false);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        // intent for starting next activity
+        // intent for starting master password creation and locked screen
+        // TODO: add locked password screen
         Intent masterPasswordActivityIntent = new Intent(this, CreateMasterPasswordActivity.class);
+        Intent homeActivityIntent = new Intent(this, MainActivity.class);
+        // Intent lockedPasswordActivityIntent
+
+        if (checkIntroStatus()) {
+            startActivity(homeActivityIntent);
+            finish();
+        }
 
         // hides top action bar for aesthetics
         getSupportActionBar().hide();
