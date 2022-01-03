@@ -67,10 +67,6 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +92,7 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 startActivity(mainMenuActivityIntent);
+                finish();
             }
         });
     }

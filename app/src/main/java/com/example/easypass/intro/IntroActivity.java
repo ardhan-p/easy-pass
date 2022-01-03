@@ -3,6 +3,7 @@ package com.example.easypass.intro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.easypass.LoginActivity;
 import com.example.easypass.MainActivity;
 import com.example.easypass.R;
 import com.example.easypass.masterpassword.CreateMasterPasswordActivity;
@@ -36,13 +37,12 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         // intent for starting master password creation and locked screen
-        // TODO: add locked password screen
         Intent masterPasswordActivityIntent = new Intent(this, CreateMasterPasswordActivity.class);
-        Intent homeActivityIntent = new Intent(this, MainActivity.class);
+        Intent loginActivityIntent = new Intent(this, LoginActivity.class);
         // Intent lockedPasswordActivityIntent
 
         if (checkIntroStatus()) {
-            startActivity(homeActivityIntent);
+            startActivity(loginActivityIntent);
             finish();
         }
 
