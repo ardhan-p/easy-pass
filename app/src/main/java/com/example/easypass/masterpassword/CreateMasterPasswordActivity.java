@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.easypass.MainActivity;
 import com.example.easypass.R;
@@ -69,35 +67,9 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         }
     }
 
-    private byte[] translateFromHex(String hex) throws NoSuchAlgorithmException {
-        byte[] bytes = new byte[hex.length() / 2];
 
-        for (int i = 0; i < bytes.length; i++) {
-            bytes[i] = (byte)Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
-        }
 
-        return bytes;
-    }
 
-    private boolean validateMasterPassword(String inputPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String[] passwordParts = storedPassword.split(":");
-
-        int iterations = Integer.parseInt(passwordParts[0]);
-        byte[] salt = translateFromHex(passwordParts[1]);
-        byte[] hash = translateFromHex(passwordParts[2]);
-
-        PBEKeySpec keySpec = new PBEKeySpec(inputPassword.toCharArray(), salt, iterations, hash.length * 8);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        byte[] newHash = skf.generateSecret(keySpec).getEncoded();
-
-        int difference = hash.length ^ newHash.length;
-
-        for (int i = 0; i < hash.length && i < newHash.length; i++) {
-            difference |= hash[i] ^ newHash[i];
-        }
-
-        return difference == 0;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +79,7 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
 
         Intent mainMenuActivityIntent = new Intent(this, MainActivity.class);
 
-        masterPasswordInput = findViewById(R.id.searchLoginInput);
+        masterPasswordInput = findViewById(R.id.loginMasterPasswordInput);
         confirmBtn = findViewById(R.id.confirmMasterPasswordBtn);
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {

@@ -14,6 +14,4 @@ public class MasterPassword {
     @NonNull
     public String masterPassword;
 
-
-    // TODO: create master password constructors
 }
