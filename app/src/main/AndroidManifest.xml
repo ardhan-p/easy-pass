@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPass">
         <activity
+            android:name=".CreateLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -23,7 +26,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".masterpassword.CreateMasterPasswordActivity"
             android:exported="true">
