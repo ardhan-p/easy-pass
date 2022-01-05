@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_bg_color"
-    tools:context=".CreateLoginActivity">
+    tools:context=".ViewLoginActivity"
+    android:background="@color/blue_bg_color">
+
 
     <TextView
         android:id="@+id/viewLoginAccountNameTitle"
@@ -99,29 +100,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/generatePasswordButton"
-        android:layout_width="161dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="36dp"
+        android:id="@+id/saveEditsButton"
+        android:layout_width="156dp"
+        android:layout_height="97dp"
         android:backgroundTint="@color/blue_btn_color"
-        android:text="Generate Password"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewLoginPasswordLayout" />
-
-    <Button
-        android:id="@+id/createLoginObjectButton"
-        android:layout_width="150dp"
-        android:layout_height="83dp"
-        android:backgroundTint="@color/blue_btn_color"
-        android:text="Create Login"
+        android:text="Save Edits"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generatePasswordButton"
-        app:layout_constraintVertical_bias="0.182" />
+        app:layout_constraintTop_toBottomOf="@+id/viewLoginPasswordLayout"
+        app:layout_constraintVertical_bias="0.264" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
