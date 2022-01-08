@@ -29,6 +29,11 @@ public class Login {
         this.loginPassword = loginPassword;
     }
 
+    @NonNull
+    public String getLoginUsername() {
+        return loginUsername;
+    }
+
     public Login() {
 
     }

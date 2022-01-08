@@ -5,13 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.easypass.database.AppDatabase;
 import com.example.easypass.database.Login;
+import com.example.easypass.database.LoginDao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import net.sqlcipher.database.*;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navBar;
@@ -21,12 +27,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // needed to get the passphrase for SQLCipher
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("appPrefs", MODE_PRIVATE);
+        char[] masterPassword = pref.getString(getString(R.string.prefs_master_password), null).toCharArray();
+
         // initialises access with local room database
+        final byte[] passphrase = SQLiteDatabase.getBytes(masterPassword);
+        final SupportFactory factory = new SupportFactory(passphrase);
         final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "easypass-db")
+                .openHelperFactory(factory)
                 .allowMainThreadQueries()
                 .build();
 
-        // initialises default fragment with home fragment
+        Login testLogin = new Login("title", "username", "password");
+        db.loginDao().insertLogin(testLogin);
+
+        Login newLogin = db.loginDao().getLogin(0);
+        Log.d("I", newLogin.getLoginUsername());
+
+        // initialises default fragment with home fragment in fragment viewer
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
 
         // switches displayed fragment depending on what the user has selected on nav bar

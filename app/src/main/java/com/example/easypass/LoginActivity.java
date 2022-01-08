@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText masterPasswordInput;
     Button loginBtn;
 
-
     private boolean validateMasterPassword(String inputPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String[] passwordParts = storedPassword.split(":");
 
