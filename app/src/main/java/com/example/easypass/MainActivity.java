@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.sqlcipher.database.*;
 
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navBar;
@@ -39,11 +40,21 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-        Login testLogin = new Login("title", "username", "password");
-        db.loginDao().insertLogin(testLogin);
+        // working the sql room shenanigans
 
-        Login newLogin = db.loginDao().getLogin(0);
-        Log.d("I", newLogin.getLoginUsername());
+//        Login testLogin = new Login("title", "username", "password");
+//        db.loginDao().insertLogin(testLogin);
+//        db.loginDao().deleteLogin(testLogin);
+
+//        List<Login> loginList = db.loginDao().getAllLogins();
+//
+//        for (Login l : loginList) {
+//            Log.d("I", l.getLoginTitle());
+//        }
+
+//        Login newLogin = db.loginDao().getLogin(0);
+//        Log.d("I", newLogin.getLoginTitle());
+//        Log.d("I", newLogin.getLoginUsername());
 
         // initialises default fragment with home fragment in fragment viewer
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();

@@ -30,8 +30,18 @@ public class Login {
     }
 
     @NonNull
+    public String getLoginTitle() {
+        return loginTitle;
+    }
+
+    @NonNull
     public String getLoginUsername() {
         return loginUsername;
+    }
+
+    @NonNull
+    public String getLoginPassword() {
+        return loginPassword;
     }
 
     public Login() {
