@@ -8,9 +8,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Login {
-    @PrimaryKey (autoGenerate = true)
-    public Integer id = 0;
-
+    @PrimaryKey
     @ColumnInfo(name = "title")
     @NonNull
     public String loginTitle;

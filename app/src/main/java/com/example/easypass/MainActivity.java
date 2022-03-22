@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         // working the sql room shenanigans
 
 //        Login testLogin = new Login("title", "username", "password");
+//        Login testLogin = new Login("Instagram", "bruh", "moment");
 //        db.loginDao().insertLogin(testLogin);
 //        db.loginDao().deleteLogin(testLogin);
 

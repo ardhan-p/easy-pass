@@ -25,6 +25,6 @@ public interface LoginDao {
     @Query("SELECT * FROM Login WHERE title LIKE '%' || :searchTerm || '%'")
     public List<Login> getSearchedLogins(String searchTerm);
 
-    @Query("SELECT * FROM Login WHERE id = :currentID")
-    public Login getLogin(int currentID);
+    @Query("SELECT * FROM Login WHERE title = :currentTitle")
+    public Login getLogin(int currentTitle);
 }

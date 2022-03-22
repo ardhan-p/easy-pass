@@ -1,6 +1,8 @@
 package com.example.easypass;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +18,9 @@ import com.example.easypass.database.AppDatabase;
 import com.example.easypass.database.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SupportFactory;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -27,13 +32,25 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View homeView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // needed to get the passphrase for SQLCipher
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("appPrefs", Context.MODE_PRIVATE);
+        char[] masterPassword = pref.getString(getString(R.string.prefs_master_password), null).toCharArray();
+
+        // initialises access with local room database
+        final byte[] passphrase = SQLiteDatabase.getBytes(masterPassword);
+        final SupportFactory factory = new SupportFactory(passphrase);
+        final AppDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "easypass-db")
+                .openHelperFactory(factory)
+                .allowMainThreadQueries()
+                .build();
+
+        // gets all logins to view in home page
         loginsRecyclerView = homeView.findViewById(R.id.home_password_list);
-        loginsArrayList = new ArrayList<Login>();
+        loginsArrayList = (ArrayList<Login>) db.loginDao().getAllLogins();
 
         LoginObjectListAdapter adapter = new LoginObjectListAdapter(loginsArrayList);
         loginsRecyclerView.setAdapter(adapter);
         loginsRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
 
         addLoginBtn = (FloatingActionButton) homeView.findViewById(R.id.add_login_fab);
 

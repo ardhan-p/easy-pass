@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     if (validateMasterPassword(newPassword, masterPassword)) {
                         startActivity(mainMenuActivityIntent);
+                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Incorrect password!", Toast.LENGTH_SHORT).show();
