@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/drawable/intro_indicator_default.xml" value="0.3687285223367698" />
         <entry key="app/src/main/res/drawable/intro_indicator_selected.xml" value="0.3687285223367698" />
         <entry key="app/src/main/res/drawable/intro_indicator_selector.xml" value="0.34791666666666665" />
-        <entry key="app/src/main/res/layout/activity_create_login.xml" value="0.24795081967213115" />
+        <entry key="app/src/main/res/layout/activity_create_login.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_create_master_pw.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />

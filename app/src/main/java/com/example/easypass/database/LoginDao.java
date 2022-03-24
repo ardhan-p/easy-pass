@@ -11,20 +11,23 @@ import java.util.List;
 @Dao
 public interface LoginDao {
     @Insert
-    public void insertLogin(Login login);
+    void insertLogin(Login login);
 
     @Update
-    public void updateLogin(Login login);
+    void updateLogin(Login login);
 
     @Delete
-    public void deleteLogin(Login login);
+    void deleteLogin(Login login);
 
     @Query("SELECT * FROM Login")
-    public List<Login> getAllLogins();
+    List<Login> getAllLogins();
 
     @Query("SELECT * FROM Login WHERE title LIKE '%' || :searchTerm || '%'")
-    public List<Login> getSearchedLogins(String searchTerm);
+    List<Login> getSearchedLogins(String searchTerm);
 
     @Query("SELECT * FROM Login WHERE title = :currentTitle")
-    public Login getLogin(int currentTitle);
+    Login getLogin(String currentTitle);
+
+    @Query("SELECT EXISTS (SELECT * FROM Login WHERE title = :currentTitle)")
+    boolean checkLogin(String currentTitle);
 }
