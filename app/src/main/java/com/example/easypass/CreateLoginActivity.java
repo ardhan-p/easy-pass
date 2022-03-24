@@ -28,7 +28,7 @@ public class CreateLoginActivity extends AppCompatActivity {
     private Button createLoginBtn;
 
     // generates a random alphanumeric string that acts as a password
-    // for future reference, perhaps add a custom way to change the characteristics of the string?
+    // for future reference, perhaps add a custom way to change the characteristics of the pw string?
     private String generatePassword(int length) {
         String alphaNumericChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
 
@@ -85,6 +85,7 @@ public class CreateLoginActivity extends AppCompatActivity {
                 } else if (db.loginDao().checkLogin(accountInput.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Account name already exists!", Toast.LENGTH_SHORT).show();
                 } else {
+                    // TODO: add logic here to add new login object into database
                     Toast.makeText(getApplicationContext(), "Account successfully created!", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.easypass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,15 @@ public class LoginObjectListAdapter extends RecyclerView.Adapter<LoginObjectList
             loginPassword = (TextView) loginView.findViewById(R.id.loginItemPasswordView);
             copyUsernameBtn = (Button) loginView.findViewById(R.id.copyUsernameButton);
             copyPasswordBtn = (Button) loginView.findViewById(R.id.copyPasswordButton);
+
+            loginView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent viewLoginIntent = new Intent(view.getContext(), ViewLoginActivity.class);
+                    viewLoginIntent.putExtra("title", loginTitle.getText().toString());
+                    view.getContext().startActivity(viewLoginIntent);
+                }
+            });
         }
     }
 }
