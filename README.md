@@ -1,2 +1,1 @@
-# EasyPass: An easy and safe way to store passwords.
-
+# EasyPass: An easy way to store passwords on your Android device.
