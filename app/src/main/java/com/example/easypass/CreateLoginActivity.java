@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easypass.database.AppDatabase;
+import com.example.easypass.database.Login;
 import com.example.easypass.database.LoginDao;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -85,8 +86,13 @@ public class CreateLoginActivity extends AppCompatActivity {
                 } else if (db.loginDao().checkLogin(accountInput.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Account name already exists!", Toast.LENGTH_SHORT).show();
                 } else {
-                    // TODO: add logic here to add new login object into database
+                    Login newLogin = new Login(accountInput.getText().toString(),
+                            usernameInput.getText().toString(),
+                            passwordInput.getText().toString());
+
+                    db.loginDao().insertLogin(newLogin);
                     Toast.makeText(getApplicationContext(), "Account successfully created!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });
