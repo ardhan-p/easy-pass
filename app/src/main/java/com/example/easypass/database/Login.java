@@ -28,6 +28,14 @@ public class Login {
         this.loginPassword = loginPassword;
     }
 
+    public void setLoginUsername(@NonNull String loginUsername) {
+        this.loginUsername = loginUsername;
+    }
+
+    public void setLoginPassword(@NonNull String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
+
     @NonNull
     public String getLoginTitle() {
         return loginTitle;

@@ -87,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+
     // closes app if user pressed back on this activity
     @Override
     public void onBackPressed() {

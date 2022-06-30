@@ -34,8 +34,9 @@
             android:id="@+id/viewLoginAccountNameInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Enter account name..."
-            android:inputType="text" />
+            android:hint="Current account name"
+            android:enabled="false"
+            android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

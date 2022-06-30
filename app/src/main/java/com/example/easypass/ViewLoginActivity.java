@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -58,8 +59,17 @@ public class ViewLoginActivity extends AppCompatActivity {
         saveEditsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: add inevitable error handling lol
-                Toast.makeText(getApplicationContext(), "Edit successful!", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(usernameInput.getText().toString()) || TextUtils.isEmpty(passwordInput.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Fill in the fields!", Toast.LENGTH_SHORT).show();
+                } else {
+                    currentLogin.setLoginUsername(usernameInput.getText().toString());
+                    currentLogin.setLoginPassword(passwordInput.getText().toString());
+
+                    db.loginDao().updateLogin(currentLogin);
+
+                    Toast.makeText(getApplicationContext(), "Edit successful!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
     }
