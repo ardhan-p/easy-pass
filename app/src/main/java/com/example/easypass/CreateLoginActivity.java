@@ -21,6 +21,7 @@ import net.sqlcipher.database.SupportFactory;
 
 import java.util.Random;
 
+// TODO: change this into a floating pop-up window instead of an activity
 public class CreateLoginActivity extends AppCompatActivity {
     private TextInputEditText accountInput;
     private TextInputEditText usernameInput;
