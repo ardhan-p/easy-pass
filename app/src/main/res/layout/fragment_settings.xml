@@ -11,16 +11,20 @@
         android:layout_height="match_parent"
         android:background="@color/blue_bg_color">
 
-        <TextView
-            android:id="@+id/settingsTest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
+        <Button
+            android:id="@+id/changeMasterPasswordBtn"
+            android:layout_width="310dp"
+            android:layout_height="110dp"
+            android:backgroundTint="@color/blue_btn_color"
+            android:text="Change Master Password"
             android:textColor="@color/white"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.049" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
