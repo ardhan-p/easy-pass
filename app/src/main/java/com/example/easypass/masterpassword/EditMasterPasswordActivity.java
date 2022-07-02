@@ -1,15 +1,14 @@
 package com.example.easypass.masterpassword;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.easypass.main.MainActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.easypass.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -21,8 +20,9 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-public class CreateMasterPasswordActivity extends AppCompatActivity {
-    TextInputEditText masterPasswordInput;
+public class EditMasterPasswordActivity extends AppCompatActivity {
+    TextInputEditText newMasterPasswordInput;
+    TextInputEditText confirmMasterPasswordInput;
     Button confirmBtn;
 
     private void saveMasterPassword(String password) {
@@ -68,35 +68,40 @@ public class CreateMasterPasswordActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_master_pw);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_change_master_pw);
 
-        Intent mainMenuActivityIntent = new Intent(this, MainActivity.class);
-
-        masterPasswordInput = findViewById(R.id.loginMasterPasswordInput);
-        confirmBtn = findViewById(R.id.confirmMasterPasswordBtn);
+        newMasterPasswordInput = findViewById(R.id.loginMasterPasswordInput1);
+        confirmMasterPasswordInput = findViewById(R.id.loginMasterPasswordInput2);
+        confirmBtn = findViewById(R.id.editMasterPasswordBtn);
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String newPassword = masterPasswordInput.getText().toString();
+            public void onClick(View view) {
+                String newPassword = newMasterPasswordInput.getText().toString();
+                String confirmPassword = confirmMasterPasswordInput.getText().toString();
 
-                try {
-                    String newMasterPassword = generatePasswordHash(newPassword);
-                    saveMasterPassword(newMasterPassword);
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
-                } catch (InvalidKeySpecException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                if (newPassword.equals(confirmPassword)) {
+                    try {
+                        String newMasterPassword = generatePasswordHash(confirmPassword);
+                        saveMasterPassword(newMasterPassword);
+                        Toast.makeText(getApplicationContext(), "Successfully updated master password!", Toast.LENGTH_SHORT).show();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    } catch (InvalidKeySpecException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    }
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
                 }
-                startActivity(mainMenuActivityIntent);
-                finish();
             }
         });
+
     }
 }
