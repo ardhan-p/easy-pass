@@ -3,8 +3,7 @@ package com.example.easypass.intro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.easypass.LoginActivity;
-import com.example.easypass.MainActivity;
+import com.example.easypass.masterpassword.LoginActivity;
 import com.example.easypass.R;
 import com.example.easypass.masterpassword.CreateMasterPasswordActivity;
 import com.google.android.material.tabs.TabLayout;

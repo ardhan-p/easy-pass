@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPass">
         <activity
-            android:name=".ViewLoginActivity"
+            android:name=".login.ViewLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateLoginActivity"
+            android:name=".login.CreateLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".masterpassword.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".intro.IntroActivity"
@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity

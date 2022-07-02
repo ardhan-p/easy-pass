@@ -1,4 +1,4 @@
-package com.example.easypass;
+package com.example.easypass.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.easypass.R;
 import com.example.easypass.database.Login;
 
 import java.util.List;

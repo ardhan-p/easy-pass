@@ -1,4 +1,4 @@
-package com.example.easypass;
+package com.example.easypass.masterpassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.easypass.R;
+import com.example.easypass.main.MainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.security.NoSuchAlgorithmException;

@@ -1,4 +1,4 @@
-package com.example.easypass;
+package com.example.easypass.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,18 +7,12 @@ import androidx.room.Room;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.example.easypass.R;
 import com.example.easypass.database.AppDatabase;
-import com.example.easypass.database.Login;
-import com.example.easypass.database.LoginDao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.sqlcipher.database.*;
-
-import java.io.File;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navBar;

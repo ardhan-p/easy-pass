@@ -1,4 +1,4 @@
-package com.example.easypass;
+package com.example.easypass.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.easypass.R;
 import com.example.easypass.database.AppDatabase;
 import com.example.easypass.database.Login;
 import com.google.android.material.textfield.TextInputEditText;

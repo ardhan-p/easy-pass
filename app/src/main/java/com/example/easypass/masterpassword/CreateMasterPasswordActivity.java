@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.easypass.MainActivity;
+import com.example.easypass.main.MainActivity;
 import com.example.easypass.R;
 import com.google.android.material.textfield.TextInputEditText;
 

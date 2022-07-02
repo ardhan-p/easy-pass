@@ -1,4 +1,4 @@
-package com.example.easypass;
+package com.example.easypass.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.easypass.login.CreateLoginActivity;
+import com.example.easypass.login.LoginObjectListAdapter;
+import com.example.easypass.R;
 import com.example.easypass.database.AppDatabase;
 import com.example.easypass.database.Login;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
