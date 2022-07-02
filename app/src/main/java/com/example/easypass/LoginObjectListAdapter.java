@@ -61,6 +61,11 @@ public class LoginObjectListAdapter extends RecyclerView.Adapter<LoginObjectList
         return loginList.size();
     }
 
+    public void setData(List<Login> loginList) {
+        this.loginList = loginList;
+        notifyDataSetChanged();
+    }
+
     // contains the login object, placed in a viewholder
     // has constructor to create a new row from login object
     public class ViewHolder extends RecyclerView.ViewHolder {
