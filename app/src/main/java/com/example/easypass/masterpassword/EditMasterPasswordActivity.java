@@ -1,5 +1,6 @@
 package com.example.easypass.masterpassword;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -8,9 +9,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.easypass.R;
+import com.example.easypass.database.AppDatabase;
 import com.google.android.material.textfield.TextInputEditText;
+
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SupportFactory;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -31,6 +37,19 @@ public class EditMasterPasswordActivity extends AppCompatActivity {
         editor.putBoolean(getString(R.string.prefs_intro_status), true);
         editor.putString(getString(R.string.prefs_master_password), password);
         editor.commit();
+    }
+
+    private void editMasterPassword(String oldPassword, String newPassword) {
+        char[] oldPassArray = oldPassword.toCharArray();
+
+        final byte[] passphrase = SQLiteDatabase.getBytes(oldPassArray);
+        final SupportFactory factory = new SupportFactory(passphrase);
+        final AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "easypass-db")
+                .openHelperFactory(factory)
+                .allowMainThreadQueries()
+                .build();
+
+        db.query("PRAGMA rekey = '"+ newPassword +"';", null);
     }
 
     // source:
@@ -74,6 +93,8 @@ public class EditMasterPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_master_pw);
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("appPrefs", Context.MODE_PRIVATE);
+
         newMasterPasswordInput = findViewById(R.id.loginMasterPasswordInput1);
         confirmMasterPasswordInput = findViewById(R.id.loginMasterPasswordInput2);
         confirmBtn = findViewById(R.id.editMasterPasswordBtn);
@@ -81,14 +102,17 @@ public class EditMasterPasswordActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String oldMasterPassword = pref.getString(getString(R.string.prefs_master_password), null);
                 String newPassword = newMasterPasswordInput.getText().toString();
                 String confirmPassword = confirmMasterPasswordInput.getText().toString();
 
                 if (newPassword.equals(confirmPassword)) {
                     try {
                         String newMasterPassword = generatePasswordHash(confirmPassword);
+                        editMasterPassword(oldMasterPassword, newMasterPassword);
                         saveMasterPassword(newMasterPassword);
                         Toast.makeText(getApplicationContext(), "Successfully updated master password!", Toast.LENGTH_SHORT).show();
+                        finish();
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
@@ -96,7 +120,6 @@ public class EditMasterPasswordActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Something went wrong!", Toast.LENGTH_SHORT).show();
                     }
-                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Passwords do not match!", Toast.LENGTH_SHORT).show();
                 }
