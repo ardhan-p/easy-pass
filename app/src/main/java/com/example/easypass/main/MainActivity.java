@@ -34,23 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-        // working the sql room shenanigans
-
-//        Login testLogin = new Login("title", "username", "password");
-//        Login testLogin = new Login("Instagram", "bruh", "moment");
-//        db.loginDao().insertLogin(testLogin);
-//        db.loginDao().deleteLogin(testLogin);
-
-//        List<Login> loginList = db.loginDao().getAllLogins();
-//
-//        for (Login l : loginList) {
-//            Log.d("I", l.getLoginTitle());
-//        }
-
-//        Login newLogin = db.loginDao().getLogin(0);
-//        Log.d("I", newLogin.getLoginTitle());
-//        Log.d("I", newLogin.getLoginUsername());
-
         // initialises default fragment with home fragment in fragment viewer
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new HomeFragment()).commit();
 
@@ -84,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRestart() {
+        //TODO: optimise the refresh process of login list
         super.onRestart();
         finish();
         overridePendingTransition(0, 0);
