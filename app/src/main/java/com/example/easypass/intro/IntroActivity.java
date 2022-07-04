@@ -49,13 +49,12 @@ public class IntroActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         // create intro screen objects for viewpager
-        // TODO: add screenshots on relevant screens (locked.png is currently a placeholder)
         List<IntroScreen> screens = new ArrayList<>();
-        screens.add(new IntroScreen("Welcome to EasyPass!", R.drawable.locked));
+        screens.add(new IntroScreen("Welcome to EasyPass!", R.drawable.vault));
         screens.add(new IntroScreen("The app allows you to make passwords for your accounts and store them in a secure place!", R.drawable.locked));
-        screens.add(new IntroScreen("Create new login credentials with the plus button.", R.drawable.locked));
-        screens.add(new IntroScreen("Input your account details and generate password.", R.drawable.locked));
-        screens.add(new IntroScreen("Password will be securely encrypted and will be available in the homepage!", R.drawable.locked));
+        screens.add(new IntroScreen("Create new login credentials with the plus button.", R.drawable.intro1));
+        screens.add(new IntroScreen("Input your account details and generate password.", R.drawable.intro2));
+        screens.add(new IntroScreen("Password will be securely encrypted and will be available in the homepage!", R.drawable.intro3));
 
         // initialises viewpager with adapter with all of the screens
         pager = findViewById(R.id.introViewPager);
