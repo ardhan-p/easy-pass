@@ -8,21 +8,17 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.easypass.R;
 import com.example.easypass.database.AppDatabase;
 import com.example.easypass.database.Login;
-import com.example.easypass.database.LoginDao;
 import com.google.android.material.textfield.TextInputEditText;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SupportFactory;
 
-import java.util.Random;
 
-// TODO: change this into a floating pop-up window instead of an activity
 public class CreateLoginActivity extends AppCompatActivity {
     private TextInputEditText accountInput;
     private TextInputEditText usernameInput;
