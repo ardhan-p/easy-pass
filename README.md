@@ -6,6 +6,10 @@ EasyPass enables Android users to create encrypted login items and store them in
 
 To encrypt the local database, EasyPass utilises a hashed master password for its encryption key. It uses PBKDF2 (Password-Based Key Derivation Function) cryptographic function to achieve this. The reason that this was chosen was that it increases the resistance against rainbow table attacks and dictionary attacks, making it more secure.
 
+## Installation
+1. Download APK file from the releases section
+2. Install APK in your Android phone
+
 ## Images
 
 ![EasyPass_Pic_1](https://user-images.githubusercontent.com/49318134/204448028-d1b8c024-a7c5-43e9-9dd2-845fe21ecd4d.png)![EasyPass_Pic_2](https://user-images.githubusercontent.com/49318134/204448145-8b6919f9-4977-4825-8201-46a7015482f3.png)
